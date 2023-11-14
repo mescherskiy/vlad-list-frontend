@@ -16,9 +16,11 @@ const App = () => {
         fetchTasks()
     }, [])
 
+    const baseUrl = "https://task-list-backend-1925036ce915.herokuapp.com/api/tasks"
+
     const fetchTasks = () => {
         $.ajax({
-            url: "http://localhost:8080/api/tasks",
+            url: baseUrl,
             method: "GET",
             success: (data) => {
                 setTodoData(data)
@@ -37,7 +39,7 @@ const App = () => {
         }
         
         $.ajax({
-            url: "http://localhost:8080/api/tasks/create",
+            url: baseUrl + "/create",
             method: "POST",
             data: JSON.stringify(newTask),
             contentType: "application/json",
@@ -72,7 +74,7 @@ const App = () => {
         })
 
         $.ajax({
-            url: `http://localhost:8080/api/tasks/update/${id}`,
+            url: `${baseUrl}/update/${id}`,
             method: "PUT",
             data: JSON.stringify(task),
             contentType: "application/json",
@@ -88,7 +90,7 @@ const App = () => {
 
     const deleteTask = (id) => {
         $.ajax({
-            url: `http://localhost:8080/api/tasks/delete/${id}`,
+            url: `${baseUrl}/delete/${id}`,
             method: "DELETE",
             success: () => {
                 fetchTasks()
@@ -104,7 +106,7 @@ const App = () => {
         const updatedTask = { ...task, [propName]: !task[propName] }
 
         $.ajax({
-            url: `http://localhost:8080/api/tasks/update/${id}`,
+            url: `${baseUrl}/update/${id}`,
             method: "PUT",
             data: JSON.stringify(updatedTask),
             contentType: "application/json",
