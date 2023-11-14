@@ -1,0 +1,52 @@
+.todo-list-item {
+  font-size: 1.25rem;
+}
+
+.todo-list-item-buttons {
+  max-width: 25%;
+}
+
+.todo-list-item button {
+  width: 35px;
+  margin: 3px;
+}
+
+.todo-list-item-info {
+  cursor: pointer;
+  user-select: none;
+}
+
+.todo-list-item-info p {
+  margin: 0;
+}
+
+.todo-list-item-label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.todo-list-item-desription {
+  color: darkslategray;
+  font-size: .9rem;
+}
+
+.todo-list-item-info input {
+  border: none;
+  border-bottom: 1px dashed black;
+}
+
+.todo-list-item-timestamp {
+  font-size: .6rem;
+  font-weight: 300;
+  text-align: right;
+}
+
+.todo-list-item.done .todo-list-item-label,
+.todo-list-item.done .todo-list-item-desription {
+  text-decoration: line-through;
+}
+
+.todo-list-item.important .todo-list-item-label {
+  font-weight: bold;
+  color: steelblue;
+}
