@@ -6,7 +6,6 @@ const TaskAddForm = ({ onAdded }) => {
 
     const [formData, setFormData] = useState({
         label: "",
-        description: ""
     })
 
     const handleFormDataChange = (e) => {
@@ -17,14 +16,13 @@ const TaskAddForm = ({ onAdded }) => {
         }))
     }
 
-    const { label, description } = formData
+    const { label } = formData
 
     const onSubmit = (e) => {
         e.preventDefault()
-        onAdded(label, description)
+        onAdded(label)
         setFormData({
             label: "",
-            description: ""
         })
     }
 
@@ -38,14 +36,6 @@ const TaskAddForm = ({ onAdded }) => {
                     placeholder="Label"
                     value={label}
                     name="label"
-                />
-
-                <input type="text"
-                    className="list-group-item"
-                    onChange={handleFormDataChange}
-                    placeholder="Description"
-                    value={description}
-                    name="description"
                 />
             </div>
             <button className="btn btn-outline-secondary">

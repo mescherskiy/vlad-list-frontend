@@ -16,7 +16,7 @@ const App = () => {
         fetchTasks()
     }, [])
 
-    const baseUrl = "https://task-list-backend-1925036ce915.herokuapp.com/api/tasks"
+    const baseUrl = "http://localhost:8080/api/tasks"
 
     const fetchTasks = () => {
         $.ajax({
@@ -31,10 +31,9 @@ const App = () => {
         })
     }
 
-    const addNewTask = (label, description) => {
+    const addNewTask = (label) => {
         const newTask = {
             label,
-            description,
             timestamp: new Date().toLocaleString()
         }
         
@@ -52,11 +51,10 @@ const App = () => {
         })
     }
 
-    const editTask = (id, label, description) => {
+    const editTask = (id, label) => {
         
         const task = {
             label,
-            description,
             timestamp: new Date().toLocaleString()
         }
 
@@ -68,7 +66,6 @@ const App = () => {
                 ? {
                     ...task,
                     label: task.label,
-                    description: task.description,
                     timestamp: task.timestamp
                 } : task)
         })
@@ -84,6 +81,22 @@ const App = () => {
             error: (error) => {
                 setTodoData(prevData)
                 console.error("Error updating task: ", error)
+            }
+        })
+    }
+
+    const updateTasks = (tasks) => {
+
+        $.ajax({
+            url: baseUrl + "/update",
+            method: "PUT",
+            data: JSON.stringify(tasks),
+            contentType: "application/json",
+            success: () => {
+                setTodoData(tasks)
+            },
+            error: (error) => {
+                console.log("Error updating task order on the server: ", error)
             }
         })
     }
@@ -123,6 +136,10 @@ const App = () => {
         toggleProperty(id, "done")
     }
 
+    const onToggleImportant = (id) => {
+        toggleProperty(id, "important")
+    }
+
     const filterTasks = (tasks, filter) => {
         switch (filter) {
             case "All":
@@ -149,9 +166,12 @@ const App = () => {
             <TaskAddForm onAdded={addNewTask} />
             <TaskList
                 todos={filterTasks(todoData, filter)}
+                setTodos={setTodoData}
                 onDeleted={deleteTask}
                 onToggleDone={onToggleDone}
-                onEdit={editTask} />
+                onToggleImportant={onToggleImportant}
+                onEdit={editTask} 
+                onUpdate={updateTasks}/>
 
         </div>
     );

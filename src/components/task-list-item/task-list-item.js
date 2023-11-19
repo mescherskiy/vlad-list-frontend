@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "./task-list-item.css";
 
-const TaskListItem = ({ id, label, description, onDeleted, onToggleDone, onEdit, done, timestamp }) => {
+const TaskListItem = ({ id, label, onDeleted, onToggleDone, onToggleImportant, onEdit, done, important, timestamp }) => {
 
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
     label: label,
-    description: description,
   })
 
   const handleEditClick = () => {
@@ -14,7 +13,7 @@ const TaskListItem = ({ id, label, description, onDeleted, onToggleDone, onEdit,
   }
 
   const handleSaveClick = () => {
-    onEdit(id, formData.label, formData.description)
+    onEdit(id, formData.label)
     setIsEditing(false)
   }
 
@@ -31,7 +30,7 @@ const TaskListItem = ({ id, label, description, onDeleted, onToggleDone, onEdit,
   }
 
   return (
-    <div className={`todo-list-item d-flex justify-content-between ${done ? "done" : ""}`}>
+    <div className={`todo-list-item d-flex justify-content-between ${done ? "done" : ""} ${important ? "important" : ""}`}>
       <div className="todo-list-item-info w-100 d-flex flex-column justify-content-evenly" onClick={isEditing ? null : onToggleDone}>
         {isEditing ? (
           <>
@@ -42,22 +41,12 @@ const TaskListItem = ({ id, label, description, onDeleted, onToggleDone, onEdit,
               value={formData.label}
               onChange={handleInputChange}
             />
-            <input
-              className="todo-list-item-desription"
-              type="text"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-            />
           </>
         ) : (
           <>
             <p
               className="todo-list-item-label">
               {label}
-            </p>
-            <p className="todo-list-item-desription">
-              {description}
             </p>
             <p className="todo-list-item-timestamp">{timestamp}</p>
           </>
@@ -81,6 +70,11 @@ const TaskListItem = ({ id, label, description, onDeleted, onToggleDone, onEdit,
           </>
         ) : (
           <>
+            <button type="button"
+              className="btn btn-outline-warning btn-sm float-end"
+              onClick={onToggleImportant}>
+              <i className="fa-solid fa-exclamation"></i>
+            </button>
             <button type="button"
               className="btn btn-outline-success btn-sm float-end"
               onClick={handleEditClick}

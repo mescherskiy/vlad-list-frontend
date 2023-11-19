@@ -3,7 +3,10 @@
 }
 
 .todo-list-item-buttons {
-  max-width: 25%;
+  max-width: 35%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .todo-list-item button {
@@ -14,6 +17,7 @@
 .todo-list-item-info {
   cursor: pointer;
   user-select: none;
+  padding-right: 1rem;
 }
 
 .todo-list-item-info p {
@@ -21,13 +25,7 @@
 }
 
 .todo-list-item-label {
-  font-weight: 600;
   font-size: 1rem;
-}
-
-.todo-list-item-desription {
-  color: darkslategray;
-  font-size: .9rem;
 }
 
 .todo-list-item-info input {
@@ -41,12 +39,11 @@
   text-align: right;
 }
 
-.todo-list-item.done .todo-list-item-label,
-.todo-list-item.done .todo-list-item-desription {
+.todo-list-item.done .todo-list-item-label {
   text-decoration: line-through;
 }
 
 .todo-list-item.important .todo-list-item-label {
   font-weight: bold;
-  color: steelblue;
+  color: rgb(5, 5, 5);
 }
