@@ -16,7 +16,7 @@ const App = () => {
         fetchTasks()
     }, [])
 
-    const baseUrl = "https://vlad-list-backend-8430212dcaf4.herokuapp.com/tasks/api"
+    const baseUrl = "https://vlad-list-backend-8430212dcaf4.herokuapp.com/api/tasks"
 
     const fetchTasks = () => {
         $.ajax({
